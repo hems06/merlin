@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday!</title>
+    <style>
+        body {
+            text-align: center;
+            background: linear-gradient(to right, #E6E6FA, #D8BFD8);
+            font-family: 'Poppins', sans-serif;
+            color: #fff;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .welcome {
+            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+            font-size: 8vw;
+            color: #9370DB;
+            margin-top: 10vh;
+            animation: fadeIn 2s ease-in-out;
+        }
+        .name-animation {
+            display: inline-block;
+            white-space: nowrap;
+        }
+        .name-animation span {
+            display: inline-block;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInLetter 0.5s forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        @keyframes fadeInLetter {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .image-container {
+            margin-top: 3vh;
+        }
+        .image-container img {
+            width: 70%;
+            max-width: 250px;
+            height: auto;
+            border-radius: 15px;
+        }
+        .countdown, .music-button, .next-button {
+            position: fixed;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 8px 12px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9em;
+        }
+        .countdown {
+            bottom: 5%;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(5px);
+            width: 85%;
+            max-width: 280px;
+            font-weight: bold;
+        }
+        .music-button {
+            bottom: 15%;
+            background: #9370DB;
+            color: white;
+        }
+        .music-button:hover {
+            background: #BA55D3;
+        }
+        .next-button {
+            bottom: 25%;
+            background: #9370DB;
+            color: white;
+            border-radius: 50%;
+            font-size: 1em;
+        }
+        .next-button:hover {
+            background: #BA55D3;
+        }
+        @media (max-width: 768px) {
+            .welcome {
+                font-size: 10vw;
+            }
+            .music-button, .next-button {
+                font-size: 0.8em;
+                padding: 6px 10px;
+            }
+            .image-container img {
+                width: 80%;
+            }
+        }
+        @media (max-width: 480px) {
+            .welcome {
+                font-size: 12vw;
+                margin-top: 8vh;
+            }
+            .music-button, .next-button {
+                font-size: 0.7em;
+                padding: 5px 8px;
+            }
+            .image-container img {
+                width: 85%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="welcome"> Happy Birthday <span class="name-animation" id="name"></span>! </div>
+    <p>A special surprise for a special friend! 🎂</p>
+    <div class="image-container">
+        <img src="birth1.jpg" alt="Birthday Image">
+    </div>
+    <button class="next-button" onclick="location.href='about.html'">➜</button>
+    <button class="music-button" onclick="toggleMusic()">🎵 For You</button>
+    <audio id="bg-music" src="kathaipoma.mp3"></audio>
+    <div class="countdown" id="countdown"></div>
+    <script>
+        function animateName(name) {
+            const nameContainer = document.getElementById("name");
+            nameContainer.innerHTML = "";
+            name.split(" ").forEach((word, wordIndex) => {
+                word.split("").forEach((letter, index) => {
+                    let span = document.createElement("span");
+                    span.textContent = letter;
+                    span.style.animationDelay = `${(wordIndex * 5 + index) * 0.2}s`;
+                    nameContainer.appendChild(span);
+                });
+                let space = document.createTextNode(" ");
+                nameContainer.appendChild(space);
+            });
+        }
+        animateName("Merlin");
+
+        function toggleMusic() {
+            const music = document.getElementById("bg-music");
+            const musicButton = document.querySelector(".music-button");
+            if (music.paused) {
+                music.play();
+                musicButton.textContent = "⏸ Pause";
+            } else {
+                music.pause();
+                musicButton.textContent = "🎵 For You";
+            }
+        }
+
+        function startCountdown() {
+            const birthday = new Date('March 14, 2025 00:00:00').getTime();
+            const timer = setInterval(() => {
+                const now = new Date().getTime();
+                const timeLeft = birthday - now;
+                if (timeLeft <= 0) {
+                    document.getElementById("countdown").innerHTML = "It's Birthday Time! 😄";
+                    clearInterval(timer);
+                } else {
+                    const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+                    const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+                    const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+                    document.getElementById("countdown").innerHTML = `⏳ ${days}d ${hours}h ${minutes}m ${seconds}s left!`;
+                }
+            }, 1000);
+        }
+        startCountdown();
+    </script>
+</body>
+</html>
