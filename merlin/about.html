@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday! </title>
+    <style>
+        body {
+            text-align: center;
+            background:linear-gradient(to right, #E6E6FA, #D8BFD8);
+            font-family: 'Poppins', sans-serif;
+            color: #fff;
+            overflow: hidden;
+            position: relative;
+        }
+        .welcome {
+            color: #9370DB;
+            font-family:'Times New Roman', Times, serif;
+            font-size: 3em;
+            margin-top: 140px;
+            animation: fadeIn 2s ease-in-out;
+        }
+        .name-animation {
+            display: inline-block;
+            white-space: nowrap;
+        }
+        .name-animation span {
+            display: inline-block;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInLetter 0.5s forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        @keyframes fadeInLetter {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .music-button {
+            position: fixed;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #9370DB;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 1.2em;
+        }
+        .music-button:hover {
+            background: #BA55D3;
+        }
+        .next-button {
+            position: fixed;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #9370DB;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.5em;
+        }
+        .next-button:hover {
+            background: #BA55D3;
+        }
+        .about-her {
+            margin-top: 50px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 20px;
+            border-radius: 15px;
+            backdrop-filter: blur(5px);
+            width: 90%;
+            height: 90%;
+            max-height: 500px; /* Increased height */
+            max-width: 350px;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: left;
+        
+        }
+        .about-her img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            display: block;
+            margin: 0 auto 10px;
+        }
+        .about-her ul {
+            list-style: none;
+            padding: 0;
+        }
+        .about-her ul li {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="welcome"> Happy Birthday <span class="name-animation" id="name"></span>! </div>
+    <p></p>
+    <button class="next-button" onclick="location.href='gallery.html'">➜</button>
+    
+    <div class="about-her">
+        <img src="birth1.jpg" alt="Her Photo">
+        <h2>About Her</h2>
+        <ul>
+            <li>She is an extrovert , who loves to talk and easily brightens any conversation</li>
+            <li>She became close to you quickly 🤝, making your bond feel natural and effortless</li>
+            <li>Sometimes, she can be a bit strict  but it always comes from a place of care</li>
+            <li>Around her, you feel comfortable expressing yourself without any fear 💬</li>
+            <li>She is a great listener and always offers a shoulder to lean on when you need it</li>
+        <li>Her warm and lively personality makes her truly special and unforgettable 💜✨</li>
+        </ul>
+    </div>
+
+   
+
+    <script>
+        function animateName(name) {
+            const nameContainer = document.getElementById("name");
+            nameContainer.innerHTML = "";
+            name.split(" ").forEach((word, wordIndex) => {
+                word.split("").forEach((letter, index) => {
+                    let span = document.createElement("span");
+                    span.textContent = letter;
+                    span.style.animationDelay = `${(wordIndex * 5 + index) * 0.2}s`;
+                    nameContainer.appendChild(span);
+                });
+                let space = document.createTextNode(" ");
+                nameContainer.appendChild(space);
+            });
+        }
+        animateName("");
+
+       
+    </script>
+</body>
+</html>
